@@ -5,7 +5,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import br.com.zup.oragetalents.proposta.validators.CPFOrCNPJ;
+import br.com.zup.oragetalents.proposta.validators.Unique;
+
 public class PropostaRequest {
+
+	@CPFOrCNPJ
+	@Unique(field = "documento", entity = Proposta.class)
+	private String documento;
+
 	@NotBlank
 	@Email
 	private String email;
@@ -17,12 +25,16 @@ public class PropostaRequest {
 	@PositiveOrZero
 	private Double salario;
 
-	public PropostaRequest(@NotBlank @Email String email, @NotBlank String endereco,
+	public PropostaRequest(@CPFOrCNPJ String documento, @NotBlank @Email String email, @NotBlank String endereco,
 			@NotNull @PositiveOrZero Double salario) {
-		super();
+		this.documento = documento;
 		this.email = email;
 		this.endereco = endereco;
 		this.salario = salario;
+	}
+
+	public String getDocumento() {
+		return documento;
 	}
 
 	public String getEmail() {
@@ -38,6 +50,6 @@ public class PropostaRequest {
 	}
 
 	public Proposta toModel() {
-		return new Proposta(this.email, this.endereco, this.salario);
+		return new Proposta(this.documento, this.email, this.endereco, this.salario);
 	}
 }

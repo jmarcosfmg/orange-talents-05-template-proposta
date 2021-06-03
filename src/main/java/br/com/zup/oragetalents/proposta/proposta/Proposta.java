@@ -32,7 +32,9 @@ public class Proposta {
 	@PositiveOrZero
 	private Double salario;
 
-	public Proposta(@NotBlank @Email String email, @NotBlank String endereco, @PositiveOrZero Double salario) {
+	public Proposta(String documento, @NotBlank @Email String email, @NotBlank String endereco,
+			@NotNull @PositiveOrZero Double salario) {
+		this.documento = documento;
 		this.email = email;
 		this.endereco = endereco;
 		this.salario = salario;
@@ -44,6 +46,10 @@ public class Proposta {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getDocumento() {
+		return documento;
 	}
 
 	public String getEmail() {
