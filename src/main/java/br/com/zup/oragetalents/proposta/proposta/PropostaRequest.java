@@ -6,12 +6,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import br.com.zup.oragetalents.proposta.validators.CPFOrCNPJ;
-import br.com.zup.oragetalents.proposta.validators.Unique;
 
 public class PropostaRequest {
 
+	@NotBlank
 	@CPFOrCNPJ
-	@Unique(field = "documento", entity = Proposta.class)
 	private String documento;
 
 	@NotBlank
