@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.external;
+package br.com.zup.oragetalents.proposta.external.financeira;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -11,6 +11,5 @@ public interface FinanceiraClient {
 	
 	@PostMapping("/solicitacao")
 	ResultadoAnaliseFinanceira analise(@RequestBody SolicitacaoAnalise solicitacao);
-	
 
 }

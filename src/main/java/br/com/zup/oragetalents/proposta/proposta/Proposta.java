@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-import br.com.zup.oragetalents.proposta.external.StatusConverter;
+import br.com.zup.oragetalents.proposta.external.financeira.StatusConverter;
 import br.com.zup.oragetalents.proposta.validators.CPFOrCNPJ;
 
 @Entity
@@ -37,8 +37,10 @@ public class Proposta {
 	@PositiveOrZero
 	private Double salario;
 
-	@Convert( converter = StatusConverter.class )
+	@Convert(converter = StatusConverter.class)
 	private StatusProposta status;
+
+	private String numeroCartao;
 
 	public Proposta(String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco,
 			@NotNull @PositiveOrZero Double salario) {
@@ -88,6 +90,14 @@ public class Proposta {
 
 	public Double getSalario() {
 		return salario;
+	}
+
+	public String getNumeroCartao() {
+		return this.numeroCartao;
+	}
+
+	public void setNumeroCartao(String cartao) {
+		this.numeroCartao = cartao;
 	}
 
 }

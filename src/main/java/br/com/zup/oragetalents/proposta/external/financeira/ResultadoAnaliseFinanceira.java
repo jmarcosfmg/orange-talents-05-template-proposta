@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.external;
+package br.com.zup.oragetalents.proposta.external.financeira;
 
 public class ResultadoAnaliseFinanceira {
 	private String documento;
