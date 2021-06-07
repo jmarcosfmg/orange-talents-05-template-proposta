@@ -1,6 +1,8 @@
 package br.com.zup.oragetalents.proposta.proposta;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,16 +28,23 @@ public class Proposta {
 	private String email;
 
 	@NotBlank
+	private String nome;
+
+	@NotBlank
 	private String endereco;
 
 	@NotNull
 	@PositiveOrZero
 	private Double salario;
 
-	public Proposta(String documento, @NotBlank @Email String email, @NotBlank String endereco,
+	@Enumerated(value = EnumType.STRING)
+	private StatusProposta status;
+
+	public Proposta(String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco,
 			@NotNull @PositiveOrZero Double salario) {
 		this.documento = documento;
 		this.email = email;
+		this.nome = nome;
 		this.endereco = endereco;
 		this.salario = salario;
 	}
@@ -60,7 +69,25 @@ public class Proposta {
 		return endereco;
 	}
 
+	public void setStatusProposta(StatusProposta status) {
+		this.status = status;
+	}
+
+	public void setStatusProposta(String status) {
+		Class<StatusProposta> enumType = StatusProposta.class;
+		this.status = Enum.valueOf(enumType, status);
+	}
+
+	public String getStatusProposta() {
+		return this.status.toString();
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+
 	public Double getSalario() {
 		return salario;
 	}
+
 }

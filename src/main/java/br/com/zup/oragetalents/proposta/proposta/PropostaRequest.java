@@ -16,6 +16,9 @@ public class PropostaRequest {
 	@NotBlank
 	@Email
 	private String email;
+	
+	@NotBlank
+	private String nome;
 
 	@NotBlank
 	private String endereco;
@@ -25,11 +28,12 @@ public class PropostaRequest {
 	private Double salario;
 
 	public PropostaRequest(@CPFOrCNPJ String documento, @NotBlank @Email String email, @NotBlank String endereco,
-			@NotNull @PositiveOrZero Double salario) {
+			@NotNull @PositiveOrZero Double salario, @NotBlank String nome) {
 		this.documento = documento;
 		this.email = email;
 		this.endereco = endereco;
 		this.salario = salario;
+		this.nome = nome;
 	}
 
 	public String getDocumento() {
@@ -49,6 +53,6 @@ public class PropostaRequest {
 	}
 
 	public Proposta toModel() {
-		return new Proposta(this.documento, this.email, this.endereco, this.salario);
+		return new Proposta(this.documento, this.email, this.nome, this.endereco, this.salario);
 	}
 }
