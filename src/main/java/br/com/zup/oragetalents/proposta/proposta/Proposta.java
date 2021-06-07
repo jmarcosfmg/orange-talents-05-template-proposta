@@ -1,8 +1,7 @@
 package br.com.zup.oragetalents.proposta.proposta;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import br.com.zup.oragetalents.proposta.external.StatusConverter;
 import br.com.zup.oragetalents.proposta.validators.CPFOrCNPJ;
 
 @Entity
@@ -37,7 +37,7 @@ public class Proposta {
 	@PositiveOrZero
 	private Double salario;
 
-	@Enumerated(value = EnumType.STRING)
+	@Convert( converter = StatusConverter.class )
 	private StatusProposta status;
 
 	public Proposta(String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco,

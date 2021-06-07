@@ -11,8 +11,19 @@ public enum StatusProposta {
 		this.status = string;
 	}
 	
-	@Override
-    public String toString() {
-        return this.status;
+    public static StatusProposta fromStatus(String status) {
+        if ( status.toUpperCase().equals("NAO_ELEGIVEL")) {
+            return COM_RESTRICAO;
+        }
+        if (status.toUpperCase().equals("ELEGIVEL")) {
+            return SEM_RESTRICAO;
+        }
+        throw new UnsupportedOperationException(
+            "The status " + status + " is not supported!"
+        );
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
