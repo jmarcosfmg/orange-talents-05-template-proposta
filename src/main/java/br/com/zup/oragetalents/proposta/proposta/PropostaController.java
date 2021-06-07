@@ -1,8 +1,8 @@
 package br.com.zup.oragetalents.proposta.proposta;
 
 import java.net.URI;
+import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -48,8 +48,8 @@ public class PropostaController {
 	@RequestMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> buscaProposta(@PathVariable Long id) {
-		Proposta proposta = propostaRepo.findById(id)
-				.orElseThrow(() -> new EntityNotFoundException("Proposta não existe."));
-		return ResponseEntity.ok(new PropostaResponse(proposta));
+		Optional<Proposta> proposta = propostaRepo.findById(id);
+		if(proposta.isEmpty()) return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(new PropostaResponse(proposta.get()));
 	}
 }
