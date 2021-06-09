@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Component
-@FeignClient(name="financeira", url="localhost:9999/api")
+@FeignClient(name="financeira", url="${proposta.external.financeira.host}:${proposta.external.financeira.port}/api")
 public interface FinanceiraClient {
 	
 	@PostMapping("/solicitacao")
