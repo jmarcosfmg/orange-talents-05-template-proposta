@@ -1,15 +1,21 @@
 package br.com.zup.oragetalents.proposta.proposta;
 
+import java.util.UUID;
+
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import br.com.zup.oragetalents.proposta.cartao.Cartao;
 import br.com.zup.oragetalents.proposta.external.financeira.StatusConverter;
 import br.com.zup.oragetalents.proposta.validators.CPFOrCNPJ;
 
@@ -17,8 +23,10 @@ import br.com.zup.oragetalents.proposta.validators.CPFOrCNPJ;
 public class Proposta {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(columnDefinition = "BINARY(16)")
+	private UUID id;
 
 	@CPFOrCNPJ
 	private String documento;
@@ -40,7 +48,8 @@ public class Proposta {
 	@Convert(converter = StatusConverter.class)
 	private StatusProposta status;
 
-	private String numeroCartao;
+	@OneToOne
+	private Cartao cartao;
 
 	public Proposta(String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco,
 			@NotNull @PositiveOrZero Double salario) {
@@ -55,7 +64,7 @@ public class Proposta {
 	public Proposta() {
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -92,12 +101,18 @@ public class Proposta {
 		return salario;
 	}
 
-	public String getNumeroCartao() {
-		return this.numeroCartao;
+	public Cartao getCartao() {
+		return this.cartao;
 	}
 
-	public void setNumeroCartao(String cartao) {
-		this.numeroCartao = cartao;
+	public void setCartao(Cartao cartao) {
+		this.cartao = cartao;
+	}
+
+	public String getNumeroCartao() {
+		if (this.cartao == null)
+			return null;
+		return this.cartao.getNumero();
 	}
 
 }

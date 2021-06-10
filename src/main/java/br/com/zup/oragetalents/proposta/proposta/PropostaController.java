@@ -2,6 +2,7 @@ package br.com.zup.oragetalents.proposta.proposta;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -26,14 +27,15 @@ public class PropostaController {
 
 	@Autowired
 	private PropostaRepository propostaRepo;
-	
+
 	@Autowired
 	private FinanceiraClient financeira;
 
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> criaProposta(@RequestBody @Valid PropostaRequest propostaRequest) {
-		if(propostaRepo.existsByDocumento(propostaRequest.getDocumento())) return ResponseEntity.status(422).build();
+		if (propostaRepo.existsByDocumento(propostaRequest.getDocumento()))
+			return ResponseEntity.status(422).build();
 		Proposta novaProposta = propostaRepo.save(propostaRequest.toModel());
 		SolicitacaoAnalise solicitacaoAnalise = new SolicitacaoAnalise(novaProposta);
 		ResultadoAnaliseFinanceira resultadoAnalise = financeira.analise(solicitacaoAnalise);
@@ -47,9 +49,10 @@ public class PropostaController {
 	@GetMapping
 	@RequestMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> buscaProposta(@PathVariable Long id) {
+	public ResponseEntity<?> buscaProposta(@PathVariable UUID id) {
 		Optional<Proposta> proposta = propostaRepo.findById(id);
-		if(proposta.isEmpty()) return ResponseEntity.notFound().build();
+		if (proposta.isEmpty())
+			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(new PropostaResponse(proposta.get()));
 	}
 }

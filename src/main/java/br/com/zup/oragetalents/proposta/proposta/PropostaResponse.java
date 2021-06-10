@@ -1,11 +1,13 @@
 package br.com.zup.oragetalents.proposta.proposta;
 
+import java.util.UUID;
+
 public class PropostaResponse {
 
-	private Long id;
+	private UUID id;
 
 	private String documento;
-	
+
 	private String nome;
 
 	private String email;
@@ -13,9 +15,9 @@ public class PropostaResponse {
 	private String endereco;
 
 	private Double salario;
-	
+
 	private String status;
-	
+
 	private String numeroCartao;
 
 	public PropostaResponse(Proposta proposta) {
@@ -29,7 +31,7 @@ public class PropostaResponse {
 		this.numeroCartao = proposta.getNumeroCartao();
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -60,5 +62,4 @@ public class PropostaResponse {
 	public String getNumeroCartao() {
 		return numeroCartao;
 	}
-
 }
