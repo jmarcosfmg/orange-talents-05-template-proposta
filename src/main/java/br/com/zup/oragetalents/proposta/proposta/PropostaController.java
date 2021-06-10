@@ -46,8 +46,8 @@ public class PropostaController {
 				.build();
 	}
 
-	@GetMapping
-	@RequestMapping("/{id}")
+	 
+	@GetMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> buscaProposta(@PathVariable UUID id) {
 		Optional<Proposta> proposta = propostaRepo.findById(id);

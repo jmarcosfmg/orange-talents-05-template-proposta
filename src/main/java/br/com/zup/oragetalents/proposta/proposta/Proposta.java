@@ -112,7 +112,7 @@ public class Proposta {
 	public String getNumeroCartao() {
 		if (this.cartao == null)
 			return null;
-		return this.cartao.getNumero();
+		return this.cartao.getId();
 	}
 
 }
