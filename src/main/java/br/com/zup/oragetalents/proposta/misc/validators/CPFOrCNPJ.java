@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.validators;
+package br.com.zup.oragetalents.proposta.misc.validators;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;

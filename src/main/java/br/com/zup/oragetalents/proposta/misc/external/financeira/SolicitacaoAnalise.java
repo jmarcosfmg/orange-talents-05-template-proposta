@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.external.financeira;
+package br.com.zup.oragetalents.proposta.misc.external.financeira;
 
 import br.com.zup.oragetalents.proposta.proposta.Proposta;
 

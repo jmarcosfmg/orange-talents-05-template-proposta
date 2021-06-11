@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.handler;
+package br.com.zup.oragetalents.proposta.misc.handler;
 
 public class FieldErrorMessage {
 	private String field;

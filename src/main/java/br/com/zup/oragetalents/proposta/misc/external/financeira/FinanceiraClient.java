@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.external.financeira;
+package br.com.zup.oragetalents.proposta.misc.external.financeira;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zup.oragetalents.proposta.external.financeira.FinanceiraClient;
-import br.com.zup.oragetalents.proposta.external.financeira.ResultadoAnaliseFinanceira;
-import br.com.zup.oragetalents.proposta.external.financeira.SolicitacaoAnalise;
+import br.com.zup.oragetalents.proposta.misc.external.financeira.FinanceiraClient;
+import br.com.zup.oragetalents.proposta.misc.external.financeira.ResultadoAnaliseFinanceira;
+import br.com.zup.oragetalents.proposta.misc.external.financeira.SolicitacaoAnalise;
 
 @RestController
 @RequestMapping("/proposta")

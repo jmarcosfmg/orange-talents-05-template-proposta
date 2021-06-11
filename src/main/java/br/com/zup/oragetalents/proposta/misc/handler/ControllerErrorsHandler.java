@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.handler;
+package br.com.zup.oragetalents.proposta.misc.handler;
 
 import java.util.ArrayList;
 import java.util.List;

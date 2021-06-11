@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.external.cartoes;
+package br.com.zup.oragetalents.proposta.misc.external.cartoes;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-import br.com.zup.oragetalents.proposta.validators.CPFOrCNPJ;
+import br.com.zup.oragetalents.proposta.misc.validators.CPFOrCNPJ;
 
 public class PropostaRequest {
 
