@@ -2,19 +2,15 @@ package br.com.zup.oragetalents.proposta.cartao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import br.com.zup.oragetalents.proposta.biometria.Biometria;
+import br.com.zup.oragetalents.proposta.cartao.bloqueio.BloqueioCartao;
 import br.com.zup.oragetalents.proposta.proposta.Proposta;
 
 @Entity
@@ -29,6 +25,9 @@ public class Cartao {
 
 	@OneToMany
 	private List<Biometria> biometrias;
+	
+	@OneToOne
+	private BloqueioCartao bloqueio;
 
 	public Cartao(@NotBlank String id, Proposta proposta) {
 		this.id = id;
@@ -52,10 +51,12 @@ public class Cartao {
 		return biometrias;
 	}
 
-	// Não deve ser usado, só está aqui por causa do Hibernate
-	@Deprecated
-	public void setBiometrias(List<Biometria> biometrias) {
-		this.biometrias = biometrias;
+	public void bloqueiaCartao(BloqueioCartao bloqueio) {
+		this.bloqueio = bloqueio;
+	}
+	
+	public BloqueioCartao getBloqueio() {
+		return this.bloqueio;
 	}
 
 	public void addBiometria(Biometria biometria) {
