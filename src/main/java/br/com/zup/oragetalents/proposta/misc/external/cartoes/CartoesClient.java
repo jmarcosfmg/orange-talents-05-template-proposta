@@ -1,7 +1,5 @@
 package br.com.zup.oragetalents.proposta.misc.external.cartoes;
 
-import java.util.Map;
-
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,5 +17,8 @@ public interface CartoesClient {
 	
 	@PostMapping("/{id}/bloqueios")
 	ResultadoBloqueio bloqueia(@PathVariable("id") String idCartao, @RequestBody BloqueioRequest sistemaResponsavel);
+	
+	@PostMapping("/{id}/avisos")
+	ResultadoAviso avisaViagem(@PathVariable("id") String idCartao, @RequestBody Aviso avisoReq);
 	
 }

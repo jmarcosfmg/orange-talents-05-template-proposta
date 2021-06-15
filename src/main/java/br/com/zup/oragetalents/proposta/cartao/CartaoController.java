@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.oragetalents.proposta.cartao.bloqueio.BloqueioCartao;
 import br.com.zup.oragetalents.proposta.misc.external.Metrics;
+import br.com.zup.oragetalents.proposta.misc.external.cartoes.Aviso;
 import br.com.zup.oragetalents.proposta.misc.external.cartoes.BloqueioRequest;
 import br.com.zup.oragetalents.proposta.misc.external.cartoes.CartoesClient;
 import br.com.zup.oragetalents.proposta.viagem.AvisoViagem;
 import br.com.zup.oragetalents.proposta.viagem.ViagemRequest;
+import feign.FeignException;
 
 @RestController
 @RequestMapping("/cartoes")
@@ -63,6 +65,11 @@ public class CartaoController {
 		Cartao cartao = metrics.findCartaoTime().record(() -> em.find(Cartao.class, idCartao));
 		if (cartao == null)
 			return ResponseEntity.status(404).body("Cartão inexistente!");
+		try {
+			cartoesClient.avisaViagem(idCartao, new Aviso(viagemReq.getDestino(), viagemReq.getTermino())).getResultado();
+		}catch(FeignException e) {
+			return ResponseEntity.status(500).build();
+		}
 		AvisoViagem viagem = viagemReq.toModel(cartao, request.getRemoteAddr(), request.getHeader("User-Agent"));
 		em.persist(viagem);
 		return ResponseEntity.ok().build();

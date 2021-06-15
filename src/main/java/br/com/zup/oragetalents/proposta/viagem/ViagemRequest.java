@@ -1,6 +1,6 @@
 package br.com.zup.oragetalents.proposta.viagem;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
@@ -19,9 +19,9 @@ public class ViagemRequest {
 	@NotNull
 	@Future
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date termino;
+	private LocalDate termino;
 
-	public ViagemRequest(@NotBlank String destino, @NotNull @Future Date termino) {
+	public ViagemRequest(@NotBlank String destino, @NotNull @Future LocalDate termino) {
 		this.destino = destino;
 		this.termino = termino;
 	}
@@ -30,7 +30,7 @@ public class ViagemRequest {
 		return destino;
 	}
 
-	public Date getTermino() {
+	public LocalDate getTermino() {
 		return termino;
 	}
 

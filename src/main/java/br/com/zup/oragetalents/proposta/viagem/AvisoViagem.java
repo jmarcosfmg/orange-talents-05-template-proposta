@@ -1,7 +1,7 @@
 package br.com.zup.oragetalents.proposta.viagem;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -44,13 +44,13 @@ public class AvisoViagem {
 	@NotNull
 	@Future
 	@DateTimeFormat(iso = ISO.DATE)
-	private Date termino;
+	private LocalDate termino;
 
 	@NotNull
 	private LocalDateTime instanteAviso = LocalDateTime.now();
 
 	public AvisoViagem(@NotNull Cartao cartao, @NotBlank String ipCliente, @NotBlank String userAgent,
-			@NotBlank String destino, @NotNull @Future Date termino) {
+			@NotBlank String destino, @NotNull @Future LocalDate termino) {
 		this.cartao = cartao;
 		this.ipCliente = ipCliente;
 		this.userAgent = userAgent;
@@ -78,7 +78,7 @@ public class AvisoViagem {
 		return destino;
 	}
 
-	public Date getTermino() {
+	public LocalDate getTermino() {
 		return termino;
 	}
 
