@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -39,5 +40,13 @@ public class ControllerErrorsHandler {
 		return ResponseEntity.badRequest()
 				.body(new FieldErrorMessage(ex.getCause().toString(), ex.getLocalizedMessage()));
 	}
-
+	
+	
+	@ExceptionHandler(value = { HttpMessageNotReadableException.class })
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public ResponseEntity<?> illegalArgumentException(HttpMessageNotReadableException ex, WebRequest request) {
+		String[] motives = ex.getMessage().toString().split(":");
+		return ResponseEntity.badRequest()
+				.body(new FieldErrorMessage(motives[0], motives[1]));
+	}
 }
