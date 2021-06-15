@@ -17,36 +17,35 @@ import br.com.zup.oragetalents.proposta.cartao.Cartao;
 
 @Entity
 public class BloqueioCartao {
-	
+
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(columnDefinition = "BINARY(16)")
 	private UUID id;
-	
+
 	@NotNull
 	private LocalDateTime instanteBloqueio = LocalDateTime.now();
-	
+
 	@OneToOne
 	private Cartao cartao;
-	
+
 	@NotBlank
 	private String ip;
-	
+
 	@NotBlank
 	private String userAgent;
-	
+
 	public BloqueioCartao(Cartao cartao, String ip, String userAgent) {
 		this.cartao = cartao;
-		cartao.bloqueiaCartao(this);
 		this.ip = ip;
 		this.userAgent = userAgent;
 	}
-	
+
 	@Deprecated
 	public BloqueioCartao() {
 	}
-	
+
 	public UUID getId() {
 		return id;
 	}

@@ -1,10 +1,13 @@
 package br.com.zup.oragetalents.proposta.misc.external.cartoes;
 
+import java.util.Map;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
@@ -15,6 +18,6 @@ public interface CartoesClient {
 	ResultadoAnaliseCartoes analise(@RequestParam("idProposta") String idProposta);
 	
 	@PostMapping("/{id}/bloqueios")
-	ResultadoBloqueio bloqueia(@PathVariable("id") String idCartao);
+	ResultadoBloqueio bloqueia(@PathVariable("id") String idCartao, @RequestBody BloqueioRequest sistemaResponsavel);
 	
 }

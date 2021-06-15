@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import br.com.zup.oragetalents.proposta.biometria.Biometria;
-import br.com.zup.oragetalents.proposta.cartao.bloqueio.BloqueioCartao;
 import br.com.zup.oragetalents.proposta.proposta.Proposta;
 
 @Entity
@@ -26,12 +27,13 @@ public class Cartao {
 	@OneToMany
 	private List<Biometria> biometrias;
 	
-	@OneToOne
-	private BloqueioCartao bloqueio;
+	@Enumerated(EnumType.STRING)
+	private StatusCartao status;
 
 	public Cartao(@NotBlank String id, Proposta proposta) {
 		this.id = id;
 		this.proposta = proposta;
+		this.status = StatusCartao.LIBERADO;
 	}
 
 	@Deprecated
@@ -51,12 +53,20 @@ public class Cartao {
 		return biometrias;
 	}
 
-	public void bloqueiaCartao(BloqueioCartao bloqueio) {
-		this.bloqueio = bloqueio;
+	public void bloqueiaCartao() {
+		this.status = StatusCartao.BLOQUEADO;
 	}
 	
-	public BloqueioCartao getBloqueio() {
-		return this.bloqueio;
+	public void liberaCartao() {
+		this.status = StatusCartao.LIBERADO;
+	}
+	
+	public StatusCartao getStatus() {
+		return this.status;
+	}
+	
+	public boolean isBlocked() {
+		return (this.status == StatusCartao.BLOQUEADO);
 	}
 
 	public void addBiometria(Biometria biometria) {
@@ -64,5 +74,9 @@ public class Cartao {
 			this.biometrias = new ArrayList<Biometria>();
 		}
 		this.biometrias.add(biometria);
+	}
+	
+	public enum StatusCartao {
+		LIBERADO, BLOQUEADO
 	}
 }
