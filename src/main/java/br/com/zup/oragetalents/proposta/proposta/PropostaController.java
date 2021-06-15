@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zup.oragetalents.proposta.misc.external.Metrics;
 import br.com.zup.oragetalents.proposta.misc.external.financeira.FinanceiraClient;
 import br.com.zup.oragetalents.proposta.misc.external.financeira.ResultadoAnaliseFinanceira;
 import br.com.zup.oragetalents.proposta.misc.external.financeira.SolicitacaoAnalise;
@@ -27,6 +28,9 @@ public class PropostaController {
 
 	@Autowired
 	private PropostaRepository propostaRepo;
+	
+	@Autowired
+	private Metrics metrics;
 
 	@Autowired
 	private FinanceiraClient financeira;
@@ -41,6 +45,7 @@ public class PropostaController {
 		ResultadoAnaliseFinanceira resultadoAnalise = financeira.analise(solicitacaoAnalise);
 		novaProposta.setStatusProposta(resultadoAnalise.getResultadoSolicitacao());
 		propostaRepo.save(novaProposta);
+		metrics.propostaCriationCounter();
 		return ResponseEntity.status(201)
 				.header(HttpHeaders.LOCATION, URI.create("/proposta/" + novaProposta.getId().toString()).toString())
 				.build();
@@ -50,7 +55,8 @@ public class PropostaController {
 	@GetMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> buscaProposta(@PathVariable UUID id) {
-		Optional<Proposta> proposta = propostaRepo.findById(id);
+		Optional<Proposta> proposta = metrics.propostaTime().record(() -> propostaRepo.findById(id));
+		metrics.propostaConsultCounter();
 		if (proposta.isEmpty())
 			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(new PropostaResponse(proposta.get()));

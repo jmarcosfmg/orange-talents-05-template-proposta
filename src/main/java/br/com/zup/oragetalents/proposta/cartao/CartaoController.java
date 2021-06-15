@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.oragetalents.proposta.cartao.bloqueio.BloqueioCartao;
+import br.com.zup.oragetalents.proposta.misc.external.Metrics;
 import br.com.zup.oragetalents.proposta.misc.external.cartoes.BloqueioRequest;
 import br.com.zup.oragetalents.proposta.misc.external.cartoes.CartoesClient;
 
@@ -23,13 +24,16 @@ public class CartaoController {
 	@Autowired
 	private CartoesClient cartoesClient;
 
+	@Autowired
+	private Metrics metrics;
+
 	@PersistenceContext
 	private EntityManager em;
 
 	@RequestMapping(value = "/{idCartao}", method = RequestMethod.PATCH)
 	@Transactional
 	public ResponseEntity<?> bloqueiaCartao(@PathVariable String idCartao, HttpServletRequest request) {
-		Cartao cartao = em.find(Cartao.class, idCartao);
+		Cartao cartao = metrics.findCartaoTime().record(() -> em.find(Cartao.class, idCartao));
 		if (cartao == null)
 			return ResponseEntity.status(404).body("Cartão inexistente!");
 		if (cartao.isBlocked())
