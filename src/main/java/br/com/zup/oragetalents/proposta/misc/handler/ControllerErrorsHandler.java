@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
+import feign.FeignException.UnprocessableEntity;
+
 @RestControllerAdvice
 public class ControllerErrorsHandler {
 
@@ -49,4 +51,11 @@ public class ControllerErrorsHandler {
 		return ResponseEntity.badRequest()
 				.body(new FieldErrorMessage(motives[0], motives[1]));
 	}
+	
+	@ExceptionHandler(value = { UnprocessableEntity.class })
+	@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+	public FieldErrorMessage unprocessableEntityException(UnprocessableEntity ex, WebRequest request) {
+		return new FieldErrorMessage(request.getDescription(false), ex.contentUTF8());
+	}
+	
 }

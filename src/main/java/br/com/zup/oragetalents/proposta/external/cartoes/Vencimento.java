@@ -1,19 +1,18 @@
-package br.com.zup.oragetalents.proposta.misc.external.cartoes;
+package br.com.zup.oragetalents.proposta.external.cartoes;
 
 import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-public class Renegociacao {
+public class Vencimento {
 	private String id;
-	private Integer quantidade;
-	private Double valor;
+	private Integer dia;
 	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dataDeCriacao;
 
 	@Deprecated
-	public Renegociacao() {
+	public Vencimento() {
 
 	}
 
@@ -21,16 +20,11 @@ public class Renegociacao {
 		return id;
 	}
 
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-
-	public Double getValor() {
-		return valor;
+	public Integer getDia() {
+		return dia;
 	}
 
 	public LocalDateTime getDataDeCriacao() {
 		return dataDeCriacao;
 	}
-
 }

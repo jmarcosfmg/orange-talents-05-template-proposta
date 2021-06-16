@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.misc.external.cartoes;
+package br.com.zup.oragetalents.proposta.external.cartoes.aviso;
 
 import java.time.LocalDate;
 import java.util.Date;

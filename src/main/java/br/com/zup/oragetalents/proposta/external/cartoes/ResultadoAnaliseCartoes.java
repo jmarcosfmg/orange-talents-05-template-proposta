@@ -1,10 +1,14 @@
-package br.com.zup.oragetalents.proposta.misc.external.cartoes;
+package br.com.zup.oragetalents.proposta.external.cartoes;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import br.com.zup.oragetalents.proposta.external.cartoes.aviso.Aviso;
+import br.com.zup.oragetalents.proposta.external.cartoes.bloqueio.Bloqueio;
+import br.com.zup.oragetalents.proposta.external.cartoes.carteira.Carteira;
 
 public class ResultadoAnaliseCartoes {
 

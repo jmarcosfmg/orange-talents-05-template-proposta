@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import br.com.zup.oragetalents.proposta.cartao.Cartao;
 import br.com.zup.oragetalents.proposta.cartao.CartaoRepository;
-import br.com.zup.oragetalents.proposta.misc.external.cartoes.CartoesClient;
-import br.com.zup.oragetalents.proposta.misc.external.cartoes.ResultadoAnaliseCartoes;
+import br.com.zup.oragetalents.proposta.external.cartoes.CartoesClient;
+import br.com.zup.oragetalents.proposta.external.cartoes.ResultadoAnaliseCartoes;
 import br.com.zup.oragetalents.proposta.proposta.Proposta;
 import br.com.zup.oragetalents.proposta.proposta.PropostaRepository;
 

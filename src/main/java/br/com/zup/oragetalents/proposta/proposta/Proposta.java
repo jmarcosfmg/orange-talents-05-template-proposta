@@ -16,7 +16,7 @@ import javax.validation.constraints.PositiveOrZero;
 import org.hibernate.annotations.GenericGenerator;
 
 import br.com.zup.oragetalents.proposta.cartao.Cartao;
-import br.com.zup.oragetalents.proposta.misc.external.financeira.StatusConverter;
+import br.com.zup.oragetalents.proposta.external.financeira.StatusConverter;
 import br.com.zup.oragetalents.proposta.misc.validators.CPFOrCNPJ;
 
 @Entity

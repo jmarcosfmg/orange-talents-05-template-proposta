@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.cartao.bloqueio;
+package br.com.zup.oragetalents.proposta.bloqueiocartao;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

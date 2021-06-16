@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.misc.external.cartoes;
+package br.com.zup.oragetalents.proposta.external.cartoes.aviso;
 
 public class ResultadoAviso {
 	private String resultado;

@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.oragetalents.proposta.cartao.Cartao;
 import br.com.zup.oragetalents.proposta.cartao.CartaoRepository;
-import br.com.zup.oragetalents.proposta.misc.external.Metrics;
+import br.com.zup.oragetalents.proposta.external.Metrics;
 
 @RestController
 @RequestMapping("/biometria")

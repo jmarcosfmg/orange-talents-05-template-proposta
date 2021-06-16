@@ -87,7 +87,7 @@ services:
     image: jboss/keycloak
     ports: 
       - "18443:8443"
-      - "18080:8080"
+      - "8080:8080"
       - "19990:9990"
   postgres: 
     environment: 
@@ -115,12 +115,15 @@ services:
     build:
       dockerfile: /Dockerfiles/proposta.dockerfile
     ports: 
-      - "8080:8080"
+      - "8082:8081"
     environment:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       FINANCEIRA_HOST: analise
       CARTAO_HOST: contas
+      PROPOSTA_APP_PORT: 8082
+      KEYCLOAK_JWKS_URI: http://keycloak:8080/auth/realms/nosso-cartao/protocol/openid-connect/certs
+      KEYCLOAK_ISSUER_URI: http://keycloak:8080/auth/realms/nosso-cartao
   transacoes: 
     depends_on: 
       - kafka

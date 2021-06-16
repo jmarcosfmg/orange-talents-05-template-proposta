@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 import br.com.zup.oragetalents.proposta.biometria.Biometria;
+import br.com.zup.oragetalents.proposta.carteira.Carteira;
 import br.com.zup.oragetalents.proposta.proposta.Proposta;
 
 @Entity
@@ -26,9 +27,12 @@ public class Cartao {
 
 	@OneToMany
 	private List<Biometria> biometrias;
-	
+
 	@Enumerated(EnumType.STRING)
 	private StatusCartao status;
+
+	@OneToMany
+	private List<Carteira> carteiras;
 
 	public Cartao(@NotBlank String id, Proposta proposta) {
 		this.id = id;
@@ -40,7 +44,7 @@ public class Cartao {
 	public Cartao() {
 
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -56,15 +60,15 @@ public class Cartao {
 	public void bloqueiaCartao() {
 		this.status = StatusCartao.BLOQUEADO;
 	}
-	
+
 	public void liberaCartao() {
 		this.status = StatusCartao.LIBERADO;
 	}
-	
+
 	public StatusCartao getStatus() {
 		return this.status;
 	}
-	
+
 	public boolean isBlocked() {
 		return (this.status == StatusCartao.BLOQUEADO);
 	}
@@ -75,7 +79,18 @@ public class Cartao {
 		}
 		this.biometrias.add(biometria);
 	}
-	
+
+	public void addCarteira(Carteira carteira) {
+		if (this.carteiras == null) {
+			this.carteiras = new ArrayList<Carteira>();
+		}
+		this.carteiras.add(carteira);
+	}
+
+	public List<Carteira> getCarteiras() {
+		return this.carteiras;
+	}
+
 	public enum StatusCartao {
 		LIBERADO, BLOQUEADO
 	}

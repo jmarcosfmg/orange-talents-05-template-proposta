@@ -1,4 +1,4 @@
-package br.com.zup.oragetalents.proposta.misc.external;
+package br.com.zup.oragetalents.proposta.external;
 
 
 import org.springframework.stereotype.Component;

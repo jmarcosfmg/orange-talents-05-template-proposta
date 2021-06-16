@@ -1,30 +1,25 @@
-package br.com.zup.oragetalents.proposta.misc.external.cartoes;
+package br.com.zup.oragetalents.proposta.external.cartoes.bloqueio;
 
 import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-public class Vencimento {
+public class Bloqueio {
 	private String id;
-	private Integer dia;
 	@DateTimeFormat(iso = ISO.DATE_TIME)
-	private LocalDateTime dataDeCriacao;
+	private LocalDateTime bloqueadoEm;
 
 	@Deprecated
-	public Vencimento() {
-
+	public Bloqueio() {
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public Integer getDia() {
-		return dia;
+	public LocalDateTime getBloqueadoEm() {
+		return bloqueadoEm;
 	}
 
-	public LocalDateTime getDataDeCriacao() {
-		return dataDeCriacao;
-	}
 }
