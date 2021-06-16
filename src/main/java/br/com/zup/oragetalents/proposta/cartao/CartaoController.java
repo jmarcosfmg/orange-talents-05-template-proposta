@@ -78,13 +78,20 @@ public class CartaoController {
 		}
 		return ResponseEntity.status(500).body("Ação não permitida!");
 	}
-
-	@PutMapping("/{idCartao}")
+	@PutMapping("/{idCartao}/paypall")
+	public ResponseEntity<?> insereCarteiraPaypall(@PathVariable String idCartao, @RequestBody @Valid CarteiraRequest carteiraReq) {
+		return insereCarteira(idCartao, carteiraReq, TipoCarteira.getTipo("PAYPALL"));
+	}
+	@PutMapping("/{idCartao}/samsung")
+	public ResponseEntity<?> insereCarteiraSamsung(@PathVariable String idCartao, @RequestBody @Valid CarteiraRequest carteiraReq) {
+		return insereCarteira(idCartao, carteiraReq, TipoCarteira.getTipo("SAMSUNG_PAY"));
+	}
+	
 	@Transactional
-	public ResponseEntity<?> insereCarteira(@PathVariable String idCartao, @RequestBody @Valid CarteiraRequest carteiraReq, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<?> insereCarteira(String idCartao, CarteiraRequest carteiraReq, TipoCarteira tipoCarteira) {
 		Cartao cartao = buscaCartao(idCartao);
 		ResultadoCarteira resultado = (ResultadoCarteira) requisitaCliente(() -> cartoesClient.insereCarteira(idCartao, carteiraReq));
-		Carteira carteira = new Carteira(resultado.getId(), carteiraReq.getEmail(), TipoCarteira.PAYPALL);
+		Carteira carteira = new Carteira(resultado.getId(), carteiraReq.getEmail(), tipoCarteira);
 		cartao.addCarteira(carteira);
 		em.persist(carteira);
 		em.persist(cartao);
@@ -103,7 +110,7 @@ public class CartaoController {
 		try {
 			return s.get();
 		}catch(UnprocessableEntity e) {
-			throw e;
+			throw new UnprocessableEntity("Erro no serviço de cartões", e.request(), e.content());
 		}
 		catch (FeignException e) {
 			throw e;
