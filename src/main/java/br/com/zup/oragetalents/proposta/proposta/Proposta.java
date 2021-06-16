@@ -28,7 +28,7 @@ public class Proposta {
 	@Column(columnDefinition = "BINARY(16)")
 	private UUID id;
 
-	@CPFOrCNPJ
+	@NotBlank
 	private String documento;
 
 	@NotBlank
@@ -51,9 +51,9 @@ public class Proposta {
 	@OneToOne
 	private Cartao cartao;
 
-	public Proposta(String documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco,
+	public Proposta(DocumentoLimpo documento, @NotBlank @Email String email, @NotBlank String nome, @NotBlank String endereco,
 			@NotNull @PositiveOrZero Double salario) {
-		this.documento = documento;
+		this.documento = documento.cifraDocumento();
 		this.email = email;
 		this.nome = nome;
 		this.endereco = endereco;
