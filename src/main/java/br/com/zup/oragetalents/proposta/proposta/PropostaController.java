@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zup.oragetalents.proposta.external.Metrics;
+import br.com.zup.oragetalents.proposta.external.CustomMetrics;
 import br.com.zup.oragetalents.proposta.external.financeira.FinanceiraClient;
 import br.com.zup.oragetalents.proposta.external.financeira.ResultadoAnaliseFinanceira;
 import br.com.zup.oragetalents.proposta.external.financeira.SolicitacaoAnalise;
@@ -30,7 +30,7 @@ public class PropostaController {
 	private PropostaRepository propostaRepo;
 	
 	@Autowired
-	private Metrics metrics;
+	private CustomMetrics metrics;
 
 	@Autowired
 	private FinanceiraClient financeira;

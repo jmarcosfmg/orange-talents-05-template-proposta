@@ -8,11 +8,11 @@ import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 
 @Component
-public class Metrics {
+public class CustomMetrics {
 	
 	private final MeterRegistry registry;
 	
-	public Metrics(MeterRegistry registry) {
+	public CustomMetrics(MeterRegistry registry) {
 		this.registry = registry;
 	}
 	

@@ -27,7 +27,7 @@ public class CheckCartaoProposta {
 	private CartaoRepository cartaoRepository;
 
 	@Scheduled(fixedDelayString = "${proposta.timed.cartaoAnalise}") // Tempo sempre em milisegundos!
-	private void checkCartaoProposta() {
+	protected void checkCartaoProposta() {
 		List<Proposta> updatedPropostas = propostaRepository.findAllByCartaoIsNull();
 		List<Cartao> newCartaoList = new ArrayList<>();
 		for (Proposta proposta : updatedPropostas) {

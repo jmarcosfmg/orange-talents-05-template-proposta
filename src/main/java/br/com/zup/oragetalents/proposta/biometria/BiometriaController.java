@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.oragetalents.proposta.cartao.Cartao;
 import br.com.zup.oragetalents.proposta.cartao.CartaoRepository;
-import br.com.zup.oragetalents.proposta.external.Metrics;
+import br.com.zup.oragetalents.proposta.external.CustomMetrics;
 
 @RestController
 @RequestMapping("/biometria")
@@ -27,7 +27,7 @@ public class BiometriaController {
 	@Autowired
 	private BiometriaRepository biometriaRepository;
 	@Autowired
-	private Metrics metrics;
+	private CustomMetrics metrics;
 
 	@PostMapping("/{idCartao}")
 	@Transactional

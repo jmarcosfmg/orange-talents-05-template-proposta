@@ -25,7 +25,7 @@ import br.com.zup.oragetalents.proposta.carteira.Carteira;
 import br.com.zup.oragetalents.proposta.carteira.CarteiraRequest;
 import br.com.zup.oragetalents.proposta.carteira.ResultadoCarteira;
 import br.com.zup.oragetalents.proposta.carteira.TipoCarteira;
-import br.com.zup.oragetalents.proposta.external.Metrics;
+import br.com.zup.oragetalents.proposta.external.CustomMetrics;
 import br.com.zup.oragetalents.proposta.external.cartoes.CartoesClient;
 import br.com.zup.oragetalents.proposta.external.cartoes.aviso.Aviso;
 import br.com.zup.oragetalents.proposta.external.cartoes.aviso.ResultadoAviso;
@@ -43,7 +43,7 @@ public class CartaoController {
 	private CartoesClient cartoesClient;
 
 	@Autowired
-	private Metrics metrics;
+	private CustomMetrics metrics;
 
 	@PersistenceContext
 	private EntityManager em;
