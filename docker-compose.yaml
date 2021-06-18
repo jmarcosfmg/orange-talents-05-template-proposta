@@ -84,10 +84,11 @@ services:
       KEYCLOAK_PASSWORD: Pa55w0rd
       KEYCLOAK_USER: admin
       POSTGRES_PORT_5432_TCP_ADDR: "127.0.0.1"
+      KEYCLOAK_FRONTEND_URL: http://keycloak:8080/auth
     image: jboss/keycloak
     ports: 
       - "18443:8443"
-      - "8080:8080"
+      - "18080:8080"
       - "19990:9990"
   postgres: 
     environment: 
@@ -120,8 +121,8 @@ services:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       FINANCEIRA_HOST: analise
-      CARTAO_HOST: contas
-      PROPOSTA_APP_PORT: 8082
+      CARTAO_HOST: contas 
+      PROPOSTA_APP_PORT: 8081
       KEYCLOAK_JWKS_URI: http://keycloak:8080/auth/realms/nosso-cartao/protocol/openid-connect/certs
       KEYCLOAK_ISSUER_URI: http://keycloak:8080/auth/realms/nosso-cartao
   transacoes: 

@@ -38,7 +38,7 @@ public class PropostaController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> criaProposta(@RequestBody @Valid PropostaRequest propostaRequest) {
-		if (propostaRepo.existsByDocumento(propostaRequest.getDocumento()))
+		if (propostaRepo.existsByDocumento(new DocumentoLimpo(propostaRequest.getDocumento()).cifraDocumento()))
 			return ResponseEntity.status(422).build();
 		Proposta novaProposta = propostaRepo.save(propostaRequest.toModel());
 		SolicitacaoAnalise solicitacaoAnalise = new SolicitacaoAnalise(novaProposta);
